@@ -511,11 +511,58 @@ function createHTML(HtmlHolder, MagicSquare) {
 	title.textContent = titletext;
 	const style = document.createElement('style');
 	style.textContent = generateTableStyles();
+const script = document.createElement('script');
+script.textContent = `
+    // 1. Tablodaki tüm hücrelerdeki span'ları bul
+    const cells = document.querySelectorAll('.magic-square-table td');
+    let maxWidth = 0;
+    let maxHeight = 0;
+
+    // 2. Span'ları ölçülebilir hale getir
+    cells.forEach(cell => {
+        const span = cell.querySelector('span');
+        if (span) {
+            span.style.display = 'table-cell';
+            span.style.whiteSpace = 'nowrap';
+        }
+    });
+
+    // 3. Tarayıcıyı layout güncellemesi için zorla
+    document.body.offsetHeight;
+
+    // 4. Maksimum boyutları hesapla
+    cells.forEach(cell => {
+        const span = cell.querySelector('span');
+        if (span) {
+            maxWidth = Math.max(maxWidth, span.offsetWidth);
+            maxHeight = Math.max(maxHeight, span.offsetHeight);
+        }
+    });
+
+    // 5. CSS'i dinamik olarak oluştur ve sayfaya ekle
+    const style = document.createElement('style');
+    style.textContent = \`
+        .magic-square-table td {
+			aspect-ratio: 1 / 1;
+            width: max-content !important;
+            height: max-content !important;
+        }
+           .magic-square-table td span {
+			aspect-ratio: 1 / 1;
+            width: \${maxWidth}px !important;
+            height: \${maxHeight}px !important;
+        }
+
+    \`;
+    document.head.appendChild(style);
+`;
+document.body.appendChild(script);
 	// Append elements to <head>
 	head.appendChild(metaCharset);
 	head.appendChild(metaViewport);
 	head.appendChild(title);
 	head.appendChild(style);
+	head.appendChild(script);
 	// Create the <body> element
 	const body = document.createElement('body');
 	body.style.backgroundColor = "white";
@@ -535,7 +582,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 	squarecontainer.setAttribute('id', 'themagicsquare');
 	const footer = document.createElement('footer');
 	const pFooter = document.createElement('p');
-	pFooter.textContent = '2025 © https://ebced.free.nf/square';
+	pFooter.textContent = '2025 © https://metatronslove.github.io/magic-square-generator';
 	// Append elements to <body>
 	header.appendChild(h1);
 	main.appendChild(p);
@@ -608,7 +655,7 @@ function generateTableStyles() {
 		table.magic-square-table {
             border-collapse: collapse;
             table-layout: fixed; /* Ensures consistent cell sizing */
-            width: min-content;
+            width: max-content;
         }
 
         table.magic-square-table, table.magic-square-table td {
@@ -620,19 +667,17 @@ function generateTableStyles() {
         }
 
         .magic-square-table td {
-			aspect-ratio: 1 / 1;
-            width: min-content;
             padding: 8px;
             text-align: center;
             vertical-align: middle;
+			box-sizing: border-box;
         }
 
         .magic-square-table td > span {
-            display: inline-block; /* Required for transforms */
-            aspect-ratio: 1 / 1;
-            width: min-content;
+			display: table-cell;
             text-align: center;
             vertical-align: middle;
+			white-space: nowrap;
         }
 
         /* Rotation rules for cells and spans */
@@ -658,7 +703,7 @@ function generateTableStyles() {
 		table.magic-square-table {
             border-collapse: collapse;
             table-layout: fixed; /* Ensures consistent cell sizing */
-            width: min-content;
+            width: max-content;
         }
 
         table.magic-square-table, table.magic-square-table td {
@@ -667,17 +712,15 @@ function generateTableStyles() {
         }
 
         .magic-square-table td {
-			aspect-ratio: 1 / 1;
-            width: min-content;
+            width: max-content;
             padding: 8px;
             text-align: center;
             vertical-align: middle;
         }
 
         .magic-square-table td > span {
-            display: inline-block; /* Required for transforms */
-            aspect-ratio: 1 / 1;
-            width: min-content;
+            display: table-cell; /* Required for transforms */
+            width: max-content;
             text-align: center;
             vertical-align: middle;
         }
@@ -957,7 +1000,7 @@ function saveToLocalDisk() {
 			text += `┃`;
 			text += filename;
 			text += `  ┃\n`;
-			text += `┃https://ebced.free.nf/square            ┃    🇹🇷\n`;
+			text += `┃https://metatronslove.github.io/magic-square-generator      ┃    🇹🇷\n`;
 			text += `┃https://github.com/metatronslove                            ┃\n`;
 			text += `┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n`;
 		} else if (omode == 2) {
