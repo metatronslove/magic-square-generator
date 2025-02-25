@@ -3,6 +3,7 @@
 Bu proje, **EBCED değerlerini** kullanarak **Sihirli Kareler** oluşturan dinamik bir web uygulamasıdır. Sihirli Kare, her satır, sütun ve çaprazdaki sayıların toplamının eşit olduğu bir matematiksel griddir. Bu araç, Arapça harflerin EBCED sistemindeki sayısal değerlerini alır ve bunları sihirli kareye dönüştürür.
 
 🔗 Canlı Demo: [https://ebced.free.nf/square/](https://ebced.free.nf/square/)
+🔗 No jQuery ver: [https://ebced.free.nf/vanilla-square/](https://ebced.free.nf/vanilla-square/)
 
 ---
 
