@@ -1089,7 +1089,7 @@ function HideAndSeek(tohide, toshow, duration, delay) {
         if (s < toshow.length) {
             let el = document.querySelector(toshow[s].toString());
             if (el) {
-                el.style.display = '';
+                el.style.display = 'inline';
             }
         } else {
             clearInterval(showInterval);
