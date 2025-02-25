@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sihirli Kare Oluşturucu</title>
+    <title>Sihirli Kare Oluşturucu (Vanilla JavaScript Sürümü)</title>
     <style>
         /* Genel stil kuralları */
         body {
@@ -165,6 +165,8 @@
 			position: absolute;
 			top: 0;
 			left: 0;
+			min-width: 100%;
+			min-height: 100%;
 			width: 100%;
 			height: 100%;
 			margin: 0;
@@ -269,13 +271,12 @@
             }
         }
     </style>
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <script src="js/html2canvas.min.js"></script>
-    <script src="js/jspdf.umd.min.js"></script>
-    <script src="js/magicsquare.js"></script>
+    <script src="../js/html2canvas.min.js"></script>
+    <script src="../js/jspdf.umd.min.js"></script>
+    <script src="../js/magicsquare.vanilla.js"></script>
 </head>
 <body id="magicsquare">
-    <p style="text-align:right;"><a href="https://metatronslove.github.io/occultabjadcalculator/" turkishcontent="Okült ebced hesaplama aracını aç" englishcontent="Open occult abjad calculator" target="_blank"></a> <a href="https://metatronslove.github.io/Letter-Count-Tool/" turkishcontent="Harf sayma aracını aç" englishcontent="Open letter counter" target="_blank"></a> <a href="/vanilla" turkishcontent="Vanilla sihirli kare oluşturma aç" englishcontent="Open vanilla magic square generator" target="_blank"></a></p>
+    <p style="text-align:right;"><a href="https://metatronslove.github.io/occultabjadcalculator/" turkishcontent="Okült ebced hesaplama aracını aç" englishcontent="Open occult abjad calculator" target="_blank"></a> <a href="https://metatronslove.github.io/Letter-Count-Tool/" turkishcontent="Harf sayma aracını aç" englishcontent="Open letter counter" target="_blank"></a> <a href="../" turkishcontent="Sihirli kare oluşturma aç" englishcontent="Open magic square generator" target="_blank"></a></p>
     <h1 turkishcontent="Sihirli Kare Oluşturucu" englishcontent="Magic Square Creator">Sihirli Kare Oluşturucu</h1>
     <!-- Form alanı -->
     <table id="formshaper">
@@ -322,7 +323,7 @@
                 </section>
             </td>
             <td class="right">
-                <div id="squaremagic" class="form-group">
+                <div id="squaremagic" class="form-group" style="width: 330px;">
                     <label for="squareoutas"><span turkishcontent="Çıktı biçemi: " englishcontent="Output format: ">Çıktı biçemi: </span></label>
                     <select id="squareoutas" name="squareoutas" title="">
                         <option value="tabs" turkishcontent="Tab'la ayrılmış metin" englishcontent="Tab seperated text" selected="selected">Tab'la ayrılmış metin</option>
@@ -336,10 +337,10 @@
                            turkishcontent="Tab boşluk ayraçlarıyla satırlarda sıralanmış sihirli kare hücreleri, metin düzenleme programlarında yeterince okunabilirliği yüksek bir görünüm kazanır. Microsoft Excel, LibreOffice Hesap Tablosu, Google E-tablolar gibi elektronik tablolama yazılımlarında kopyala ve yapıştır tekniği ile kolayca veri girişi olarak tablolara eklemede alışılageldik bir seçenek oluşu yadsınamaz."
                            englishcontent="Cells of a magic square arranged in rows separated by tab spaces gain a sufficiently readable appearance in text editing programs. It is undeniable that using the copy and paste technique in spreadsheet software such as Microsoft Excel, LibreOffice Calc, and Google Sheets has become a conventional option for easily adding data to tables as input."></p>
                     </div>
-                    <div id="magicabilitiesforboxed" class="form-group">
-                        <div id="borderslabel" style="display: none;" class="form-group">
+                    <div id="magicabilitiesforboxed" style="display: none; width: 330px;" class="form-group">
+                        <div id="borderslabel" class="form-group">
                             <label for="borders" turkishcontent="Kutu kenarları: " englishcontent="Box borders: ">Kutu kenarları: </label>
-                            <select id="borders" name="borders" class="" title="" style="display: none;">
+                            <select id="borders" name="borders" class="" title="">
                                 <option value=0 selected="selected">┌──────────┘</option>
                                 <option value=1>┌┄┄┄┄┄┄┄┄┄┄┘</option>
                                 <option value=2>┏┅┅┅┅┅┅┅┅┅┅┛</option>
@@ -348,13 +349,13 @@
                                 <option value=5>╔══════════╝</option>
                             </select>
                         </div>
-                        <div id="cellheightlabel" style="display: none;" class="form-group">
+                        <div id="cellheightlabel" class="form-group">
                             <label for="cellheight" turkishcontent="Hücre yüksekliği: " englishcontent="Cell height: ">Hücre yüksekliği: </label>
-                            <input title="" id="cellheight" name="cellheight" value=0 type="number" min=0 max=20 step=1 style="display: none;">
+                            <input title="" id="cellheight" name="cellheight" value=0 type="number" min=0 max=20 step=1>
                         </div>
-                        <div id="cellwidthlabel" style="display: none;" class="form-group">
+                        <div id="cellwidthlabel" class="form-group">
                             <label for="cellwidth" turkishcontent="Hücre genişliği: " englishcontent="Cell width: ">Hücre genişliği: </label>
-                            <input title="" id="cellwidth" name="cellwidth" value=0 type="number" min=0 max=20 step=1 style="display: none;">
+                            <input title="" id="cellwidth" name="cellwidth" value=0 type="number" min=0 max=20 step=1>
                         </div>
                     </div>
                     <div id="magicabilitiesforhtmlc" style="display: none; width: 330px;" class="form-group">
