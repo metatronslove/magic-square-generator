@@ -530,8 +530,8 @@ function createHTML(HtmlHolder, MagicSquare) {
     script.textContent = `
 
         const cells = document.querySelectorAll('.magic-square-table td');
-        let maxWidth = 0;
-        let maxHeight = 0;
+        let maxWidthCell = 0;
+        let maxHeightCell = 0;
 
         cells.forEach(cell => {
             const span = cell.querySelector('span');
@@ -546,8 +546,8 @@ function createHTML(HtmlHolder, MagicSquare) {
         cells.forEach(cell => {
             const span = cell.querySelector('span');
             if (span) {
-                maxWidth = Math.max(maxWidth, span.offsetWidth);
-                maxHeight = Math.max(maxHeight, span.offsetHeight);
+                maxWidthCell = Math.max(maxWidthCell, span.offsetWidth);
+                maxHeightCell = Math.max(maxHeightCell, span.offsetHeight);
             }
         });
 
@@ -560,8 +560,8 @@ function createHTML(HtmlHolder, MagicSquare) {
             }
             .magic-square-table td span {
                 aspect-ratio: 1 / 1;
-                width: \${maxWidth}px !important;
-                height: \${maxHeight}px !important;
+                width: \${maxWidthCell}px !important;
+                height: \${maxHeightCell}px !important;
             }
         \`;
         document.head.appendChild(style);
@@ -1281,7 +1281,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const omode = parseInt(document.getElementById("MagicSquareOutput").getAttribute('omode'));
             const ohide = [
                 ["#MagicSquareOutput", "#magicabilitiesfortabs"],
-                ["#magicabilitiesforboxed", "#borderslabel", "#cellheightlabel", "#cellwidthlabel", "#borders", "#cellheight", "#cellwidth", "#BoxedSquareOutput"],
+                ["#magicabilitiesforboxed", "#BoxedSquareOutput"],
                 ["#editorContainer", "#HtmlcSquareOutput", "#highlightedOutput"],
                 [],
                 []
@@ -1350,4 +1350,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
