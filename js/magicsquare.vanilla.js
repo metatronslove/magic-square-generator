@@ -79,18 +79,18 @@ function createMagicSquare(n) {
 }
 
 function createAlgorithmSelect(n) {
-    let html = `<select id="algorithm" name="algorithm" title="">\n`;
-    if (n % 2 === 1) {
-        html += `<option value="siamase" turkishcontent="Tek sayı boyutlu kare (Siamese)" englishcontent="Odd sized magic square (Siamese)">Tek sayı boyutlu kare (Siamese)</option>\n`;
-    } else if (n % 4 === 0) {
-        html += `<option value="stracheydouble" turkishcontent="4'ün katı olan çift boyutlu sihirli kare (Strachey)" englishcontent="Doubly even sized magic square (Scratchey)">4'ün katı olan çift boyutlu sihirli kare (Strachey)</option>\n`;
-        html += `<option value="durer" turkishcontent="4'ün katı olan çift boyutlu sihirli kare (Durer)" englishcontent="Doubly even sized magic square (Durer)">4'ün katı olan çift boyutlu sihirli kare (Durer)</option>\n`;
-        html += `<option value="sExchange" turkishcontent="4'ün katı olan çift boyutlu sihirli kare (Basit yer değiştirme)" englishcontent="Doubly even sized magic square (Simple exchange)">4'ün katı olan çift boyutlu sihirli kare (Basit yer değiştirme)</option>\n`;
-    } else {
-        html += `<option value="stracheysingle" turkishcontent="4'ün katı olmayan çift boyutlu sihirli kare (Strachey)" englishcontent="Singly even sized magic square (Strachey)">4'ün katı olmayan çift boyutlu sihirli kare (Strachey)</option>\n`;
-    }
-    html += `</select>`;
-    return html;
+	let html = `<select id="algorithm" name="algorithm" title="">\n`;
+	if (n % 2 === 1) {
+		html += `<option value="siamase" turkishcontent="Tek sayı boyutlu kare (Siamese)" englishcontent="Odd sized magic square (Siamese)">${pretranslate('Tek sayı boyutlu kare (Siamese)', 'Odd sized magic square (Siamese)')}</option>\n`;
+	} else if (n % 4 === 0) {
+		html += `<option value="stracheydouble" turkishcontent="4'ün katı olan çift boyutlu sihirli kare (Strachey)" englishcontent="Doubly even sized magic square (Scratchey)">${pretranslate('4\'ün katı olan çift boyutlu sihirli kare (Strachey)', 'Doubly even sized magic square (Scratchey)')}</option>\n`;
+		html += `<option value="durer" turkishcontent="4'ün katı olan çift boyutlu sihirli kare (Durer)" englishcontent="Doubly even sized magic square (Durer)">${pretranslate('4\'ün katı olan çift boyutlu sihirli kare (Durer)', 'Doubly even sized magic square (Durer)')}</option>\n`;
+		html += `<option value="sExchange" turkishcontent="4'ün katı olan çift boyutlu sihirli kare (Basit yer değiştirme)" englishcontent="Doubly even sized magic square (Simple exchange)">${pretranslate('4\'ün katı olan çift boyutlu sihirli kare (Basit yer değiştirme)', 'Doubly even sized magic square (Simple exchange)')}</option>\n`;
+	} else {
+		html += `<option value="stracheysingle" turkishcontent="4'ün katı olmayan çift boyutlu sihirli kare (Strachey)" englishcontent="Singly even sized magic square (Strachey)">${pretranslate('4\'ün katı olmayan çift boyutlu sihirli kare (Strachey)', 'Singly even sized magic square (Strachey)')}</option>\n`;
+	}
+	html += `</select>`;
+	return html;
 }
 
 function siameseMethod(n) {
@@ -235,9 +235,9 @@ function rotateTheSquare() {
     }
     document.getElementById('MagicSquareOutput').setAttribute('rotated', degrees);
     if (getLanguage() === "turkish") {
-        rotatelabel = "Döndür(" + degrees + ")";
+        rotatelabel = degrees + "°Döndür";
     } else {
-        rotatelabel = "Rotate(" + degrees + ")";
+        rotatelabel = "Rotate" + degrees + "°";
     }
     document.querySelector("button[onclick='rotateTheSquare()']").innerHTML = rotatelabel;
     generateMagicSquare("rotate");
@@ -527,45 +527,50 @@ function createHTML(HtmlHolder, MagicSquare) {
     const style = document.createElement('style');
     style.textContent = generateTableStyles();
     const script = document.createElement('script');
-    script.textContent = `
+    script.textContent = `function equalizeCells() {
+		const cells = document.querySelectorAll('.magic-square-table td');
+		let maxWidthCell = 0;
+		let maxHeightCell = 0;
 
-        const cells = document.querySelectorAll('.magic-square-table td');
-        let maxWidthCell = 0;
-        let maxHeightCell = 0;
+		cells.forEach(cell => {
+			const span = cell.querySelector('span');
+			if (span) {
+				span.style.display = 'table-cell';
+				span.style.whiteSpace = 'nowrap';
+			}
+		});
 
-        cells.forEach(cell => {
-            const span = cell.querySelector('span');
-            if (span) {
-                span.style.display = 'table-cell';
-                span.style.whiteSpace = 'nowrap';
-            }
-        });
+		document.body.offsetHeight;
 
-        document.body.offsetHeight;
+		cells.forEach(cell => {
+			const span = cell.querySelector('span');
+			if (span) {
+				maxWidthCell = Math.max(maxWidthCell, span.offsetWidth);
+				maxHeightCell = Math.max(maxHeightCell, span.offsetHeight);
+			}
+		});
 
-        cells.forEach(cell => {
-            const span = cell.querySelector('span');
-            if (span) {
-                maxWidthCell = Math.max(maxWidthCell, span.offsetWidth);
-                maxHeightCell = Math.max(maxHeightCell, span.offsetHeight);
-            }
-        });
+		const style = document.createElement('style');
+		style.textContent = \`
+		.magic-square-table td {
+			aspect-ratio: 1 / 1;
+			width: max-content !important;
+			height: max-content !important;
+		}
+		.magic-square-table td span {
+			aspect-ratio: 1 / 1;
+			width: \${maxWidthCell}px !important;
+			height: \${maxHeightCell}px !important;
+		}\`;
+		document.head.appendChild(style);
+	}
 
-        const style = document.createElement('style');
-        style.textContent = \`
-            .magic-square-table td {
-                aspect-ratio: 1 / 1;
-                width: max-content !important;
-                height: max-content !important;
-            }
-            .magic-square-table td span {
-                aspect-ratio: 1 / 1;
-                width: \${maxWidthCell}px !important;
-                height: \${maxHeightCell}px !important;
-            }
-        \`;
-        document.head.appendChild(style);
-    `;
+	document.addEventListener('DOMContentLoaded', function() {
+		document.getElementsByClassName('magic-square-table')[0]
+			.addEventListener('load', function() {
+			equalizeCells();
+		});
+	});`;
     document.body.appendChild(script);
 
     head.appendChild(metaCharset);
@@ -661,8 +666,7 @@ function generateTableStyles() {
     let css = "";
     if (startDirection != 'none') {
 
-        css = `
-        table.magic-square-table {
+        css = `table.magic-square-table {
             border-collapse: collapse;
             table-layout: fixed; /* Ensures consistent cell sizing */
             width: max-content;
@@ -705,12 +709,10 @@ function generateTableStyles() {
 
         .row-odd.col-odd > span {
             transform: rotate(${oppositeRotate});
-        }
-        `;
+        }`;
     } else {
 
-        css = `
-        table.magic-square-table {
+        css = `table.magic-square-table {
             border-collapse: collapse;
             table-layout: fixed; /* Ensures consistent cell sizing */
             width: max-content;
@@ -733,8 +735,7 @@ function generateTableStyles() {
             width: max-content;
             text-align: center;
             vertical-align: middle;
-        }
-        `;
+        }`;
     }
     return css;
 }
