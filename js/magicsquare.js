@@ -306,11 +306,11 @@ function rotateTheSquare() {
 		degrees += 90;
 	}
 	$("#MagicSquareOutput")[0].setAttribute('rotated', degrees);
-    if (getLanguage() === "turkish") {
-        rotatelabel = degrees + "°Döndür";
-    } else {
-        rotatelabel = "Rotate" + degrees + "°";
-    }
+	if (getLanguage() === "turkish") {
+		rotatelabel = degrees + "°Döndür";
+	} else {
+		rotatelabel = "Rotate" + degrees + "°";
+	}
 	$("button[onclick='rotateTheSquare()']").html(rotatelabel);
 	generateMagicSquare("rotate");
 }
@@ -512,7 +512,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 	const style = document.createElement('style');
 	style.textContent = generateTableStyles();
 	const script = document.createElement('script');
-    script.textContent = `function equalizeCells() {
+	script.textContent = `function equalizeCells() {
 		const cells = document.querySelectorAll('.magic-square-table td');
 		let maxWidthCell = 0;
 		let maxHeightCell = 0;
@@ -742,7 +742,7 @@ function highlightCode(input, output) {
 }
 
 function formatHTML(html) {
-	const tab = '    '; // 4 spaces for indentation (can be changed to '\t' for tabs)
+	const tab = '\t'; // 4 spaces for indentation (can be changed to '\t' for tabs)
 	let result = '';
 	let indentLevel = 0; // Tracks the current indentation level
 	// Split the HTML into an array of tags and text
@@ -894,7 +894,7 @@ function saveAsPdf(filename) {
 	let paperheight = 0;
 	let paperorient = '';
 	let paperformat = '';
-	let	paperunit = "mm";
+	let paperunit = "mm";
 	if (documentSize == 'A5P') {
 		paperwidth = 148;
 		paperheight = 210;
@@ -932,16 +932,16 @@ function saveAsPdf(filename) {
 		paperunit = "mm";
 	}
 	html2canvas(element, {
-			scale: 2,
-			logging: true,
-			useCORS: true,
-			}).then(canvas => {
+		scale: 2,
+		logging: true,
+		useCORS: true,
+	}).then(canvas => {
 		const imgData = canvas.toDataURL('image/png');
 		const pdf = new jspdf.jsPDF({
 			orientation: paperorient,
 			unit: paperunit,
 			format: paperformat
-			});
+		});
 		const imgWidth = paperwidth;
 		const imgHeight = (canvas.height * imgWidth) / canvas.width;
 		pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
@@ -1185,7 +1185,7 @@ $(document).ready(function() {
 			generateMagicSquare();
 		}
 	});
-	$("#algorithm option").click(function() {
+	$("#algorithm").change(function() {
 		if (document.getElementById('lockcreator').checked) {
 			generateMagicSquare();
 		}
@@ -1201,7 +1201,7 @@ $(document).ready(function() {
 	$("input[id='cellwidth']").change(function() {
 		generateMagicSquare('none');
 	});
-	$("#borders option").click(function() {
+	$("#borders").change(function() {
 		generateMagicSquare('none');
 	});
 	$("input[name='rotationStart']").click(function() {
@@ -1218,7 +1218,7 @@ $(document).ready(function() {
 			$("button[onclick='generateMagicSquare()']").removeAttr('disabled');
 		}
 	});
-	$("#paper-sizes option").click(function() {
+	$("#paper-sizes").change(function() {
 		const documentSize = document.getElementById('paper-sizes').value;
 		if (documentSize == 'A5P') {
 			$("#pdfpngSquareOutput").css('width', '148mm');
@@ -1244,7 +1244,7 @@ $(document).ready(function() {
 		}
 		generateMagicSquare('none');
 	});
-	$("#squareoutas option").click(function() {
+	$("#squareoutas").change(function() {
 		const outas = document.getElementById('squareoutas').value;
 		const omode = parseInt($("#MagicSquareOutput").attr('omode'));
 		const ohide = [

@@ -763,7 +763,7 @@ function highlightCode(input, output) {
 }
 
 function formatHTML(html) {
-    const tab = '    ';
+	const tab = '\t';
     let result = '';
     let indentLevel = 0;
 
@@ -1198,12 +1198,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.querySelectorAll("#algorithm option").forEach(function(option) {
-        option.addEventListener('click', function() {
+    document.getElementById('algorithm').addEventListener('change', function() {
             if (document.getElementById('lockcreator').checked) {
                 generateMagicSquare();
             }
-        });
     });
 
     document.getElementById('numberswitch').addEventListener('change', function() {
@@ -1219,10 +1217,8 @@ document.addEventListener('DOMContentLoaded', function() {
         generateMagicSquare('none');
     });
 
-    document.querySelectorAll("#borders option").forEach(function(option) {
-        option.addEventListener('click', function() {
+    document.getElementById("borders").addEventListener('change', function() {
             generateMagicSquare('none');
-        });
     });
 
     document.querySelectorAll("input[name='rotationStart']").forEach(function(input) {
@@ -1246,8 +1242,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.querySelectorAll("#paper-sizes option").forEach(function(option) {
-        option.addEventListener('click', function() {
+    document.getElementById("paper-sizes").addEventListener('change', function() {
             const documentSize = document.getElementById('paper-sizes').value;
             const pdfOutput = document.getElementById('pdfpngSquareOutput');
             if (documentSize === 'A5P') {
@@ -1273,11 +1268,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 pdfOutput.style.height = 'min-content';
             }
             generateMagicSquare('none');
-        });
     });
 
-    document.querySelectorAll("#squareoutas option").forEach(function(option) {
-        option.addEventListener('click', function() {
+    document.getElementById("squareoutas").addEventListener('change', function() {
             const outas = document.getElementById('squareoutas').value;
             const omode = parseInt(document.getElementById("MagicSquareOutput").getAttribute('omode'));
             const ohide = [
@@ -1348,6 +1341,5 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (btn) btn.setAttribute('disabled', "disabled");
                 }
             }
-        });
     });
 });
