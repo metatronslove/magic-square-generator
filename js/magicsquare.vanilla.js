@@ -564,10 +564,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 	}
 
 	document.addEventListener('DOMContentLoaded', function() {
-		document.getElementsByClassName('magic-square-table')[0]
-			.addEventListener('load', function() {
-			equalizeCells();
-		});
+		equalizeCells();
 	});`;
     document.body.appendChild(script);
 
@@ -614,6 +611,44 @@ function createHTML(HtmlHolder, MagicSquare) {
     htmlcontainer.appendChild(holder);
     renderMagicSquareToTable(MagicSquare, 'themagicsquare');
     return formatHTML(holder.innerHTML);
+}
+
+function preEqualizeCells() {
+	const cells = document.querySelectorAll('.magic-square-table td');
+	let maxWidthCell = 0;
+	let maxHeightCell = 0;
+
+	cells.forEach(cell => {
+		const span = cell.querySelector('span');
+		if (span) {
+			span.style.display = 'table-cell';
+			span.style.whiteSpace = 'nowrap';
+		}
+	});
+
+	document.body.offsetHeight;
+
+	cells.forEach(cell => {
+		const span = cell.querySelector('span');
+		if (span) {
+			maxWidthCell = Math.max(maxWidthCell, span.offsetWidth);
+			maxHeightCell = Math.max(maxHeightCell, span.offsetHeight);
+		}
+	});
+
+	const style = document.createElement('style');
+	style.textContent = `
+	.magic-square-table td {
+		aspect-ratio: 1 / 1;
+		width: max-content !important;
+		height: max-content !important;
+	}
+	.magic-square-table td span {
+		aspect-ratio: 1 / 1;
+		width: ${maxWidthCell}px !important;
+		height: ${maxHeightCell}px !important;
+	}`;
+	document.head.appendChild(style);
 }
 
 function renderMagicSquareToTable(magicSquare, containerId) {
@@ -1315,6 +1350,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         highlightedOutput.scrollTop = this.scrollTop;
                     });
                     document.getElementById('magicabilitiesforhtmlc').style.display = "";
+                    document.getElementById('pdfpngSquareOutput').style.display = "";
+                    preEqualizeCells();
                     document.getElementById('pdfpngSquareOutput').style.display = "none";
                     document.querySelectorAll("button[onclick='copyToClipboard()']").forEach(function(el) {
                         el.removeAttribute('disabled');
@@ -1326,6 +1363,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById("MagicSquareOutput").setAttribute('omode', "3");
                     document.getElementById('magicabilitiesforhtmlc').style.display = "";
                     document.getElementById('pdfpngSquareOutput').style.display = "";
+                    preEqualizeCells();
                     let btn = document.querySelector("button[onclick='copyToClipboard()']");
                     if (btn) btn.setAttribute('disabled', "disabled");
                 }
@@ -1335,6 +1373,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById("MagicSquareOutput").setAttribute('omode', "4");
                     document.getElementById('magicabilitiesforhtmlc').style.display = "";
                     document.getElementById('pdfpngSquareOutput').style.display = "";
+                    preEqualizeCells();
                     let btn = document.querySelector("button[onclick='copyToClipboard()']");
                     if (btn) btn.setAttribute('disabled', "disabled");
                 }
