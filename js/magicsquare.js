@@ -602,6 +602,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 }
 
 function preEqualizeCells() {
+	const previousstyle = document.getElementById('pageofpdf');
 	const cells = document.querySelectorAll('.magic-square-table td');
 	let maxWidthCell = 0;
 	let maxHeightCell = 0;
@@ -636,6 +637,8 @@ function preEqualizeCells() {
 		width: ${maxWidthCell}px !important;
 		height: ${maxHeightCell}px !important;
 	}`;
+	previousstyle.remove();
+	style.setAttribute('id', 'pageofpdf');
 	document.head.appendChild(style);
 }
 

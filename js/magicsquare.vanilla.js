@@ -614,6 +614,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 }
 
 function preEqualizeCells() {
+	const previousstyle = document.getElementById('pageofpdf');
 	const cells = document.querySelectorAll('.magic-square-table td');
 	let maxWidthCell = 0;
 	let maxHeightCell = 0;
@@ -640,14 +641,16 @@ function preEqualizeCells() {
 	style.textContent = `
 	.magic-square-table td {
 		aspect-ratio: 1 / 1;
-		width: max-content !important;
-		height: max-content !important;
+		width: min-content !important;
+		height: min-content !important;
 	}
 	.magic-square-table td span {
 		aspect-ratio: 1 / 1;
 		width: ${maxWidthCell}px !important;
 		height: ${maxHeightCell}px !important;
 	}`;
+	previousstyle.remove();
+	style.setAttribute('id', 'pageofpdf');
 	document.head.appendChild(style);
 }
 
