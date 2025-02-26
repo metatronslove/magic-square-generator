@@ -52,12 +52,10 @@ function generateMagicSquare(job) {
     document.getElementById('HtmlcSquareOutput').value = createHTML('pdfpngSquareOutput', MagicSquare);
     highlightCode(document.getElementById('HtmlcSquareOutput'), document.getElementById('highlightedOutput'));
 
-    document.querySelectorAll("#algorithm option").forEach(option => {
-        option.addEventListener("click", function() {
-            if (document.getElementById('lockcreator').checked) {
-                generateMagicSquare();
-            }
-        });
+    document.getElementById("algorithm").addEventListener("change", function() {
+        if (document.getElementById('lockcreator').checked) {
+            generateMagicSquare();
+        }
     });
 }
 

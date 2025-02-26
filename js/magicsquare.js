@@ -44,7 +44,7 @@ function generateMagicSquare(job) {
 	document.getElementById('BoxedSquareOutput').value = boxTheSquare(MagicSquare);
 	document.getElementById('HtmlcSquareOutput').value = createHTML('pdfpngSquareOutput', MagicSquare);
 	highlightCode(document.getElementById('HtmlcSquareOutput'), document.getElementById('highlightedOutput'));
-	$("#algorithm option").click(function() {
+	$("#algorithm").change(function() {
 		if (document.getElementById('lockcreator').checked) {
 			generateMagicSquare();
 		}
