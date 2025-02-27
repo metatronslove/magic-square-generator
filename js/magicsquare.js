@@ -602,10 +602,12 @@ function createHTML(HtmlHolder, MagicSquare) {
 }
 
 function preEqualizeCells() {
+    let previousstyle = "";
 	if (document.getElementById('pageofpdf') != null) {
-	let previousstyle = document.getElementById('pageofpdf');
-	}
-	let previousstyle = "";
+	    previousstyle = document.getElementById('pageofpdf');
+	} else {
+	    previousstyle = "";
+    	}
 	const cells = document.querySelectorAll('.magic-square-table td');
 	let maxWidthCell = 0;
 	let maxHeightCell = 0;
