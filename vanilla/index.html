@@ -6,8 +6,20 @@
 	<title>Sihirli Kare Oluşturucu (Vanilla JavaScript Sürümü)</title>
 	<style>
 		/* Genel stil kuralları */
-		@import url('https://fontlibrary.org/face/dejavu-sans-mono');
-		@import url('https://fontlibrary.org/face/unique');
+		@font-face {
+			font-family: 'DejaVu Sans Mono';
+			src: url('../fonts/DejaVuSansMonoBold.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		@font-face {
+		font-family: 'UniqueRegular';
+			src: url('../fonts/UniqueRegular.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		
 		body {
 			width: calc(100% - 40px);
 			font-family: 'UniqueRegular';
