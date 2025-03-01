@@ -92,83 +92,83 @@ function createAlgorithmSelect(n) {
 //Tek boyutlu sihirli kareler için algoritmalar
 //1. Siamese Method (De la Loubère's Algorithm)
 function siameseMethod(n) {
-	let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+	let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
 	let row = 0,
 		col = Math.floor(n / 2);
 	for (let num = 1; num <= n * n; num++) {
-		magicSquare[row][col] = num;
+		MagicSquare[row][col] = num;
 		let nextRow = (row - 1 + n) % n;
 		let nextCol = (col + 1) % n;
-		if (magicSquare[nextRow][nextCol] !== 0) {
+		if (MagicSquare[nextRow][nextCol] !== 0) {
 			row = (row + 1) % n;
 		} else {
 			row = nextRow;
 			col = nextCol;
 		}
 	}
-	return magicSquare;
+	return MagicSquare;
 }
 // 4'ün katı olan çift boyutlu sihirli kare (Doubly Even method) algoritmalar
 //1. Strachey Method
 function stracheyMethod(n) {
-	let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+	let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
 	let count = 1;
 	for (let i = 0; i < n; i++) {
 		for (let j = 0; j < n; j++) {
 			// Eğer hücre, belirli bir desene uyuyorsa, sayıyı tersten yerleştir
 			if ((i % 4 === j % 4) || ((i + j) % 4 === 3)) {
-				magicSquare[i][j] = (n * n) - count + 1;
+				MagicSquare[i][j] = (n * n) - count + 1;
 			} else {
-				magicSquare[i][j] = count;
+				MagicSquare[i][j] = count;
 			}
 			count++;
 		}
 	}
-	return magicSquare;
+	return MagicSquare;
 }
 //2. Dürer's Method(Modified Strachey Method)
 function durerMethod(n) {
-	let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+	let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
 	let count = 1;
 	for (let i = 0; i < n; i++) {
 		for (let j = 0; j < n; j++) {
 			// 4x4'lük bloklar için özel desen
 			if ((i % 4 === 0 || i % 4 === 3) && (j % 4 === 0 || j % 4 === 3)) {
-				magicSquare[i][j] = count;
+				MagicSquare[i][j] = count;
 			} else if ((i % 4 === 1 || i % 4 === 2) && (j % 4 === 1 || j % 4 === 2)) {
-				magicSquare[i][j] = count;
+				MagicSquare[i][j] = count;
 			} else {
-				magicSquare[i][j] = (n * n) - count + 1;
+				MagicSquare[i][j] = (n * n) - count + 1;
 			}
 			count++;
 		}
 	}
-	return magicSquare;
+	return MagicSquare;
 }
 //3. Simple Exchange Method
 function simpleExchangeMethod(n) {
-	let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+	let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
 	let count = 1;
 	// Önce kareyi sırayla doldur
 	for (let i = 0; i < n; i++) {
 		for (let j = 0; j < n; j++) {
-			magicSquare[i][j] = count++;
+			MagicSquare[i][j] = count++;
 		}
 	}
 	// Belirli desendeki sayıları ters çevir
 	for (let i = 0; i < n; i++) {
 		for (let j = 0; j < n; j++) {
 			if ((i % 4 === j % 4) || ((i + j) % 4 === 3)) {
-				magicSquare[i][j] = (n * n) - magicSquare[i][j] + 1;
+				MagicSquare[i][j] = (n * n) - MagicSquare[i][j] + 1;
 			}
 		}
 	}
-	return magicSquare;
+	return MagicSquare;
 }
 // 4'ün katı olmayan çift boyutlu sihirli kare (Singly Even method) algoritmaları
 //Stracheys Method
 function stracheySinglyEvenMethod(n) {
-	const magicSquare = Array.from({
+	const MagicSquare = Array.from({
 		length: n
 	}, () => Array(n).fill(0));
 	const k = n / 2;
@@ -184,10 +184,10 @@ function stracheySinglyEvenMethod(n) {
 	// Fill the four quadrants
 	for (let i = 0; i < k; i++) {
 		for (let j = 0; j < k; j++) {
-			magicSquare[i][j] = miniMagic[i][j]; // Top-left quadrant
-			magicSquare[i + k][j + k] = miniMagic[i][j] + k * k; // Bottom-right quadrant
-			magicSquare[i][j + k] = miniMagic[i][j] + 2 * k * k; // Top-right quadrant
-			magicSquare[i + k][j] = miniMagic[i][j] + 3 * k * k; // Bottom-left quadrant
+			MagicSquare[i][j] = miniMagic[i][j]; // Top-left quadrant
+			MagicSquare[i + k][j + k] = miniMagic[i][j] + k * k; // Bottom-right quadrant
+			MagicSquare[i][j + k] = miniMagic[i][j] + 2 * k * k; // Top-right quadrant
+			MagicSquare[i + k][j] = miniMagic[i][j] + 3 * k * k; // Bottom-left quadrant
 		}
 	}
 	// Swap columns to fix the magic properties
@@ -203,17 +203,17 @@ function stracheySinglyEvenMethod(n) {
 	for (let i = 0; i < k; i++) {
 		for (let j = 0; j < swapCol.length; j++) {
 			const col = swapCol[j];
-			[magicSquare[i][col], magicSquare[i + k][col]] = [magicSquare[i + k][col], magicSquare[i][col]];
+			[MagicSquare[i][col], MagicSquare[i + k][col]] = [MagicSquare[i + k][col], MagicSquare[i][col]];
 		}
 	}
 	// Swap specific cells to fix the diagonals
 	const halfK = Math.floor(k / 2); // Ensure the index is an integer
-	[magicSquare[halfK][0], magicSquare[halfK + k][0]] = [magicSquare[halfK + k][0], magicSquare[halfK][0]];
-	[magicSquare[halfK + k][halfK], magicSquare[halfK][halfK]] = [magicSquare[halfK][halfK], magicSquare[halfK + k][halfK]];
+	[MagicSquare[halfK][0], MagicSquare[halfK + k][0]] = [MagicSquare[halfK + k][0], MagicSquare[halfK][0]];
+	[MagicSquare[halfK + k][halfK], MagicSquare[halfK][halfK]] = [MagicSquare[halfK][halfK], MagicSquare[halfK + k][halfK]];
 	if (!(RowSum <= MagicConstant || RowSum % 2 != 0)) {
-		MagicSquare = incrementMatrix(magicSquare, RowSum);
+		MagicSquare = incrementMatrix(MagicSquare, RowSum);
 	}
-	return magicSquare;
+	return MagicSquare;
 }
 
 function fillQuadrant(square, startRow, startCol, size, startNum) {
@@ -283,15 +283,15 @@ function mirrorTheSquare() {
 	generateMagicSquare("flip");
 }
 
-function mirrorFlip(magicSquare) {
-	const N = magicSquare.length; // Matrisin boyutunu al
+function mirrorFlip(MagicSquare) {
+	const N = MagicSquare.length; // Matrisin boyutunu al
 	let mirrorFlip = new Array(N).fill(0).map(() => new Array(N).fill(0)); // Yeni matris oluştur
 	// Ayna çevrimi uygula
 	for (let a = 0; a < N; a++) {
 		for (let b = 0; b < N; b++) {
 			let m = N - 1 - a; // Satır indeksini ters çevir
 			let n = N - 1 - b; // Sütun indeksini ters çevir
-			mirrorFlip[a][b] = magicSquare[m][n]; // Yeni matrise değeri ata
+			mirrorFlip[a][b] = MagicSquare[m][n]; // Yeni matrise değeri ata
 		}
 	}
 	return mirrorFlip;
@@ -577,7 +577,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 	}
 	p.textContent = firstparagraph;
 	const squarecontainer = document.createElement('div');
-	squarecontainer.setAttribute('id', 'themagicsquare');
+	squarecontainer.setAttribute('id', 'theMagicSquare');
 	const footer = document.createElement('footer');
 	const pFooter = document.createElement('p');
 	pFooter.textContent = '2025 © https://metatronslove.github.io/magic-square-generator';
@@ -597,7 +597,7 @@ function createHTML(HtmlHolder, MagicSquare) {
 	const htmlcontainer = document.getElementById(HtmlHolder);
 	htmlcontainer.innerHTML = "";
 	htmlcontainer.appendChild(holder);
-	renderMagicSquareToTable(MagicSquare, 'themagicsquare');
+	renderMagicSquareToTable(MagicSquare, 'theMagicSquare');
 	return formatHTML(holder.innerHTML);
 }
 
@@ -649,7 +649,7 @@ function preEqualizeCells() {
 	document.head.appendChild(style);
 }
 
-function renderMagicSquareToTable(magicSquare, containerId) {
+function renderMagicSquareToTable(MagicSquare, containerId) {
 	// Get the container element where the table will be inserted
 	const container = document.getElementById(containerId);
 	if (!container) {
@@ -660,7 +660,7 @@ function renderMagicSquareToTable(magicSquare, containerId) {
 	const table = document.createElement('table');
 	table.classList.add('magic-square-table'); // Add a class for styling
 	// Loop through the 2D array to create table rows and cells
-	magicSquare.forEach((row, rowIndex) => {
+	MagicSquare.forEach((row, rowIndex) => {
 		const tr = document.createElement('tr'); // Create a table row
 		row.forEach((cellValue, colIndex) => {
 			const td = document.createElement('td'); // Create a table cell
@@ -1148,7 +1148,7 @@ function pretranslate(turkish, english) {
 }
 
 function translateto(language) {
-	let translatables = document.querySelectorAll('#magicsquare *');
+	let translatables = document.querySelectorAll('#MagicSquare *');
 	window.activelanguage = language;
 	for (let i = 0; i < translatables.length; i += 1) {
 		if (translatables[i].getAttribute(language + 'content')) {
