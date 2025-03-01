@@ -164,7 +164,7 @@ function simpleExchangeMethod(n) {
 function stracheySinglyEvenMethod(n) {
     let MagicSquare = Array.from({ length: n }, () => Array(n).fill(0));
     const k = n / 2;
-    const miniMagic = siameseMethod(k);
+    let miniMagic = siameseMethod(k);
     const MagicConstant = (n * (n * n + 1)) / 2;
     const expectedRowElement = document.getElementById('expectedRowSum');
     const RowSum = parseFloat(expectedRowElement.value);

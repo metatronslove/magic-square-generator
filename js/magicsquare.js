@@ -173,7 +173,7 @@ function stracheySinglyEvenMethod(n) {
 	}, () => Array(n).fill(0));
 	const k = n / 2;
 	// Create the odd-order magic square for the top-left quadrant
-	const miniMagic = siameseMethod(k);
+	let miniMagic = siameseMethod(k);
 	// Satır ve sütun toplamlarını kontrol et
 	const MagicConstant = (n * (n * n + 1)) / 2;
 	const expectedRowElement = document.getElementById('expectedRowSum');
