@@ -13,7 +13,6 @@ Bu proje, **EBCED değerlerini** kullanarak **Sihirli Kareler** oluşturan dinam
 
 🔗 Canlı Demo 4: [https://magic-square-generator.onrender.com/](https://magic-square-generator.onrender.com/)
 🔗 No jQuery ver: [https://magic-square-generator.onrender.com/vanilla](https://magic-square-generator.onrender.com/vanilla)
----
 
 ## ✨ Öne Çıkan Özellikler
 
