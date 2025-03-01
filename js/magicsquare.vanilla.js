@@ -162,7 +162,7 @@ function simpleExchangeMethod(n) {
 }
 
 function stracheySinglyEvenMethod(n) {
-    const MagicSquare = Array.from({ length: n }, () => Array(n).fill(0));
+    let MagicSquare = Array.from({ length: n }, () => Array(n).fill(0));
     const k = n / 2;
     const miniMagic = siameseMethod(k);
     const MagicConstant = (n * (n * n + 1)) / 2;

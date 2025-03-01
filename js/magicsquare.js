@@ -168,7 +168,7 @@ function simpleExchangeMethod(n) {
 // 4'ün katı olmayan çift boyutlu sihirli kare (Singly Even method) algoritmaları
 //Stracheys Method
 function stracheySinglyEvenMethod(n) {
-	const MagicSquare = Array.from({
+	let MagicSquare = Array.from({
 		length: n
 	}, () => Array(n).fill(0));
 	const k = n / 2;
