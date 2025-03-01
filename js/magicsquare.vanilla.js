@@ -92,77 +92,77 @@ function createAlgorithmSelect(n) {
 }
 
 function siameseMethod(n) {
-    let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+    let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
     let row = 0,
         col = Math.floor(n / 2);
     for (let num = 1; num <= n * n; num++) {
-        magicSquare[row][col] = num;
+        MagicSquare[row][col] = num;
         let nextRow = (row - 1 + n) % n;
         let nextCol = (col + 1) % n;
-        if (magicSquare[nextRow][nextCol] !== 0) {
+        if (MagicSquare[nextRow][nextCol] !== 0) {
             row = (row + 1) % n;
         } else {
             row = nextRow;
             col = nextCol;
         }
     }
-    return magicSquare;
+    return MagicSquare;
 }
 
 function stracheyMethod(n) {
-    let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+    let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
     let count = 1;
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if ((i % 4 === j % 4) || ((i + j) % 4 === 3)) {
-                magicSquare[i][j] = (n * n) - count + 1;
+                MagicSquare[i][j] = (n * n) - count + 1;
             } else {
-                magicSquare[i][j] = count;
+                MagicSquare[i][j] = count;
             }
             count++;
         }
     }
-    return magicSquare;
+    return MagicSquare;
 }
 
 function durerMethod(n) {
-    let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+    let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
     let count = 1;
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if ((i % 4 === 0 || i % 4 === 3) && (j % 4 === 0 || j % 4 === 3)) {
-                magicSquare[i][j] = count;
+                MagicSquare[i][j] = count;
             } else if ((i % 4 === 1 || i % 4 === 2) && (j % 4 === 1 || j % 4 === 2)) {
-                magicSquare[i][j] = count;
+                MagicSquare[i][j] = count;
             } else {
-                magicSquare[i][j] = (n * n) - count + 1;
+                MagicSquare[i][j] = (n * n) - count + 1;
             }
             count++;
         }
     }
-    return magicSquare;
+    return MagicSquare;
 }
 
 function simpleExchangeMethod(n) {
-    let magicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
+    let MagicSquare = new Array(n).fill(0).map(() => new Array(n).fill(0));
     let count = 1;
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
-            magicSquare[i][j] = count++;
+            MagicSquare[i][j] = count++;
         }
     }
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if ((i % 4 === j % 4) || ((i + j) % 4 === 3)) {
-                magicSquare[i][j] = (n * n) - magicSquare[i][j] + 1;
+                MagicSquare[i][j] = (n * n) - MagicSquare[i][j] + 1;
             }
         }
     }
-    return magicSquare;
+    return MagicSquare;
 }
 
 function stracheySinglyEvenMethod(n) {
-    const magicSquare = Array.from({ length: n }, () => Array(n).fill(0));
+    const MagicSquare = Array.from({ length: n }, () => Array(n).fill(0));
     const k = n / 2;
     const miniMagic = siameseMethod(k);
     const MagicConstant = (n * (n * n + 1)) / 2;
@@ -175,10 +175,10 @@ function stracheySinglyEvenMethod(n) {
 
     for (let i = 0; i < k; i++) {
         for (let j = 0; j < k; j++) {
-            magicSquare[i][j] = miniMagic[i][j];
-            magicSquare[i + k][j + k] = miniMagic[i][j] + k * k;
-            magicSquare[i][j + k] = miniMagic[i][j] + 2 * k * k;
-            magicSquare[i + k][j] = miniMagic[i][j] + 3 * k * k;
+            MagicSquare[i][j] = miniMagic[i][j];
+            MagicSquare[i + k][j + k] = miniMagic[i][j] + k * k;
+            MagicSquare[i][j + k] = miniMagic[i][j] + 2 * k * k;
+            MagicSquare[i + k][j] = miniMagic[i][j] + 3 * k * k;
         }
     }
 
@@ -194,19 +194,19 @@ function stracheySinglyEvenMethod(n) {
     for (let i = 0; i < k; i++) {
         for (let j = 0; j < swapCol.length; j++) {
             const col = swapCol[j];
-            [magicSquare[i][col], magicSquare[i + k][col]] = [magicSquare[i + k][col], magicSquare[i][col]];
+            [MagicSquare[i][col], MagicSquare[i + k][col]] = [MagicSquare[i + k][col], MagicSquare[i][col]];
         }
     }
 
     const halfK = Math.floor(k / 2);
-    [magicSquare[halfK][0], magicSquare[halfK + k][0]] = [magicSquare[halfK + k][0], magicSquare[halfK][0]];
-    [magicSquare[halfK + k][halfK], magicSquare[halfK][halfK]] = [magicSquare[halfK][halfK], magicSquare[halfK + k][halfK]];
+    [MagicSquare[halfK][0], MagicSquare[halfK + k][0]] = [MagicSquare[halfK + k][0], MagicSquare[halfK][0]];
+    [MagicSquare[halfK + k][halfK], MagicSquare[halfK][halfK]] = [MagicSquare[halfK][halfK], MagicSquare[halfK + k][halfK]];
 
     if (!(RowSum <= MagicConstant || RowSum % 2 !== 0)) {
-        MagicSquare = incrementMatrix(magicSquare, RowSum);
+        MagicSquare = incrementMatrix(MagicSquare, RowSum);
     }
 
-    return magicSquare;
+    return MagicSquare;
 }
 
 function mirrorTheSquare() {
@@ -332,15 +332,15 @@ function incrementMatrix(MagicSquare, RowSum) {
     return MagicSquare;
 }
 
-function mirrorFlip(magicSquare) {
-    const N = magicSquare.length;
+function mirrorFlip(MagicSquare) {
+    const N = MagicSquare.length;
     let mirrorFlip = new Array(N).fill(0).map(() => new Array(N).fill(0));
 
     for (let a = 0; a < N; a++) {
         for (let b = 0; b < N; b++) {
             let m = N - 1 - a;
             let n = N - 1 - b;
-            mirrorFlip[a][b] = magicSquare[m][n];
+            mirrorFlip[a][b] = MagicSquare[m][n];
         }
     }
     return mirrorFlip;
@@ -589,7 +589,7 @@ function createHTML(HtmlHolder, MagicSquare) {
     }
     p.textContent = firstparagraph;
     const squarecontainer = document.createElement('div');
-    squarecontainer.setAttribute('id', 'themagicsquare');
+    squarecontainer.setAttribute('id', 'theMagicSquare');
     const footer = document.createElement('footer');
     const pFooter = document.createElement('p');
     pFooter.textContent = '2025 © https://metatronslove.github.io/magic-square-generator';
@@ -609,7 +609,7 @@ function createHTML(HtmlHolder, MagicSquare) {
     const htmlcontainer = document.getElementById(HtmlHolder);
     htmlcontainer.innerHTML = "";
     htmlcontainer.appendChild(holder);
-    renderMagicSquareToTable(MagicSquare, 'themagicsquare');
+    renderMagicSquareToTable(MagicSquare, 'theMagicSquare');
     return formatHTML(holder.innerHTML);
 }
 
@@ -661,7 +661,7 @@ function preEqualizeCells() {
 	document.head.appendChild(style);
 }
 
-function renderMagicSquareToTable(magicSquare, containerId) {
+function renderMagicSquareToTable(MagicSquare, containerId) {
 
     const container = document.getElementById(containerId);
     if (!container) {
@@ -672,7 +672,7 @@ function renderMagicSquareToTable(magicSquare, containerId) {
     const table = document.createElement('table');
     table.classList.add('magic-square-table');
 
-    magicSquare.forEach((row, rowIndex) => {
+    MagicSquare.forEach((row, rowIndex) => {
         const tr = document.createElement('tr');
         row.forEach((cellValue, colIndex) => {
             const td = document.createElement('td');
@@ -1171,7 +1171,7 @@ function ArabToIndian(number) {
 }
 
 function translateto(language) {
-    let translatables = document.querySelectorAll('#magicsquare *');
+    let translatables = document.querySelectorAll('#MagicSquare *');
     window.activelanguage = language;
     for (let i = 0; i < translatables.length; i++) {
         if (translatables[i].getAttribute(language + 'content')) {
