@@ -179,7 +179,7 @@ function stracheySinglyEvenMethod(n) {
 	const expectedRowElement = document.getElementById('expectedRowSum');
 	const RowSum = parseFloat(expectedRowElement.value);
 	if (!(RowSum <= MagicConstant || RowSum % 2 == 0)) {
-		MagicSquare = incrementedMagicSquare(miniMagic, (RowSum - (3 * k * k * k)) / 2);
+		miniMagic = incrementedMagicSquare(miniMagic, (RowSum - (3 * k * k * k)) / 2);
 	}
 	// Fill the four quadrants
 	for (let i = 0; i < k; i++) {
