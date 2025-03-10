@@ -59,4 +59,4 @@ Teşekkürler! 🌟
 [![Papara ile Destekle](https://img.shields.io/badge/Bağış%20Yap-%E2%9D%A4-blue)](https://ppr.ist/1T9dx8tUT)
 [![Donate using Papara](https://img.shields.io/badge/Donate-%E2%9D%A4-blue)](https://ppr.ist/1T9dx8tUT)
 
-[![Papara ile Desteklen](1513592797QR.png=150x150)](https://ppr.ist/1T99dYF5X)
+[![Papara ile Desteklen](1513592797QR.png =150x150)](https://ppr.ist/1T99dYF5X)
