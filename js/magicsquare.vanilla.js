@@ -763,7 +763,7 @@ function generateTableStyles() {
 
         table.magic-square-table, table.magic-square-table td {
             color: ${borderColor};
-            border: 4px solid ${borderColor};
+            border: 1px solid ${borderColor};
         }
 
         .magic-square-table td {
