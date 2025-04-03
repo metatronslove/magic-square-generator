@@ -720,7 +720,7 @@ function generateTableStyles() {
             font-family: Arial;
             font-weight: bold;
             color: ${borderColor};
-            border: 3px solid ${borderColor};
+            border: 1px solid ${borderColor};
         }
 
         .magic-square-table td {
